@@ -53,25 +53,6 @@ module.exports = function (app, passport) {
 		});
 	});
 
-
-	app.get('/uses', isLoggedIn, function (req, res) {
-		res.render('users.ejs', {
-
-		})
-	})
-
-	app.post('/uses', passport.authenticate('local-users', {
-		successRedirect: '/users', // redirect to the secure profile section
-		failureRedirect: '/profile', // redirect back to the signup page if there is an error
-		failureFlash: true // allow flash messages
-	}));
-
-	app.get('/chat', isLoggedIn, function (req, res) {
-		res.render('chat.ejs', {
-
-		});
-	});
-
 	// =====================================
 	// LOGOUT ==============================
 	// =====================================
