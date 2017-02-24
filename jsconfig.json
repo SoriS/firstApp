@@ -1,0 +1,11 @@
+{
+    "typeAcquisition": {
+        "include": [
+            "nodejs ",
+            "angular",
+            "express",
+            "passport",
+            "mongoose",
+        ]
+    }
+}
