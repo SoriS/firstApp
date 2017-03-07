@@ -6,6 +6,7 @@
             "express",
             "passport",
             "mongoose",
+            "passport"
         ]
     }
 }

@@ -8,7 +8,17 @@ var chatDbSet = require('./models/chat');
 
 module.exports = function (app) {
 
+    app.get('/users', isLoggedIn, function (req, res) {
 
+        userDbSet.find({}, function (error, users) {
+            if (error) {
+                users = [];
+            }
+            res.render('users.ejs', {
+                users: users
+            })
+        })
+    });
 
     app.get('/chats', isLoggedIn, function (req, res) {
 
@@ -39,29 +49,13 @@ module.exports = function (app) {
 
     });
 
+    // route middleware to make sure
+    function isLoggedIn(req, res, next) {
 
-    app.get('/users', isLoggedIn, function (req, res) {
+        // if user is authenticated in the session, carry on
+        if (req.isAuthenticated())
+            return next();
 
-        userDbSet.find({}, function (error, users) {
-            if (error) {
-                users = [];
-            }
-            res.render('users.ejs', {
-                users: users
-            })
-        })
-    });
-
-}
-
-
-// route middleware to make sure
-function isLoggedIn(req, res, next) {
-
-    // if user is authenticated in the session, carry on
-    if (req.isAuthenticated())
-        return next();
-
-    // if they aren't redirect them to the home page
-    res.redirect('/');
-}
+        // if they aren't redirect them to the home page
+        res.redirect('/');
+    }
